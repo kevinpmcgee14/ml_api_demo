@@ -140,5 +140,8 @@ Training
 Blog
 About
 Loading complete
-/census.csv
-/census_cleaned.csv
+
+#DVC
+/data/
+/artifacts/
+.DS_store

@@ -12,7 +12,6 @@ initial_scores = {
 }
 
 def test_model():
-    print(os.listdir('./model'))
     data = joblib.load('./model/artifacts/test.joblib')
     y = data[:, -1]
     X = data[:, :-1]
