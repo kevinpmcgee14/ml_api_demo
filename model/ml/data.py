@@ -49,7 +49,7 @@ def process_data(
     else:
         y = np.array([])
 
-    X_categorical = X[categorical_features].values
+    X_categorical = X[categorical_features]
     X_continuous = X.drop(*[categorical_features], axis=1)
     
     if training is True:

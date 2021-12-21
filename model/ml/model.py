@@ -1,8 +1,9 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 # Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+def train_model(X_train, y_train, model='RandomForestClassifier'):
     """
     Trains a machine learning model and returns it.
 
@@ -17,9 +18,14 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    rf = RandomForestClassifier()
-    rf.fit(X_train, y_train)
-    return rf
+    if model == 'RandomForestClassifier':
+        clf = RandomForestClassifier()
+    elif model == 'LogisticRegression':
+        clf = LogisticRegression(max_iter=500)
+    else:
+        raise "model not designed to work with repo. Please use LogisticRegression or RandomForestClassifier"
+    clf.fit(X_train, y_train)
+    return clf
 
 
 def compute_model_metrics(y, preds):
