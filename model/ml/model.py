@@ -1,6 +1,19 @@
+import os
+import joblib
+from ml.data import process_data
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+
+cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex"
+    ]
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train, model='RandomForestClassifier'):
@@ -65,3 +78,26 @@ def inference(model, X):
         Predictions from the model.
     """
     return model.predict(X)
+
+
+
+def compute_slices(data, model, feature, norm, ohencoder, lb):
+
+    for ftr in data[feature].unique():
+        df = data[data[feature] == ftr]
+        if len(df) == 0:
+            print(f'{feature} {ftr} had no data.')
+            continue
+        X, y, norm, ohencoder, lb = process_data(
+            df, categorical_features=cat_features, label="salary", training=False, norm=norm, ohencoder=ohencoder, lb=lb
+        )
+
+        preds = inference(model, X)
+        precision, recall, fbeta = compute_model_metrics(y, preds)
+
+        print(f"{feature.upper()}: {ftr.upper()}")
+        print("="*20)
+        print(f'Number of samples: {len(df)}')
+        print(f"Precision: {precision:.4f}")
+        print(f"Recall: {recall:.4f}")
+        print(f"fbeta: {fbeta:.4f}\n")

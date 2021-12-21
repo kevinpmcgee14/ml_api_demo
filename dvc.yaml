@@ -12,9 +12,9 @@ stages:
     - data/census_cleaned.csv
     - model/train_model.py
     outs:
-    - artifacts/MinMaxScaler.joblib
-    - artifacts/LabelBinarizer.joblib
-    - artifacts/OneHotEncoder.joblib
-    - artifacts/model.joblib
-    - artifacts/test.joblib
-    - artifacts/train.joblib
+    - model/artifacts/MinMaxScaler.joblib
+    - model/artifacts/LabelBinarizer.joblib
+    - model/artifacts/OneHotEncoder.joblib
+    - model/artifacts/model.joblib
+    - model/artifacts/test.joblib
+    - model/artifacts/train.joblib

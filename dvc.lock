@@ -13,3 +13,31 @@ stages:
     - path: data/census_cleaned.csv
       md5: 6b376aba8891bb36174548e56cb51f03
       size: 3314916
+  train_model:
+    cmd: python model/train_model.py
+    deps:
+    - path: data/census_cleaned.csv
+      md5: 6b376aba8891bb36174548e56cb51f03
+      size: 3314916
+    - path: model/train_model.py
+      md5: 0c8d56dc6105b582b058a846c6b4b2a5
+      size: 3211
+    outs:
+    - path: model/artifacts/LabelBinarizer.joblib
+      md5: 1ae6a221f5f735aee57975ce73a74a6d
+      size: 411
+    - path: model/artifacts/MinMaxScaler.joblib
+      md5: b30a52e4babbc9b359c676c57596a9da
+      size: 1197
+    - path: model/artifacts/OneHotEncoder.joblib
+      md5: 868cc6adca8fc782744117c6b0d1d2aa
+      size: 3459
+    - path: model/artifacts/model.joblib
+      md5: 97be1e8f308c8504bd7b3c87003f5bad
+      size: 1310
+    - path: model/artifacts/test.joblib
+      md5: 2df8e8eb2b3328b876f28a5d59940b6a
+      size: 3459530
+    - path: model/artifacts/train.joblib
+      md5: bb33acd7cb00441e6932e7fa7aeb87b6
+      size: 13837562
