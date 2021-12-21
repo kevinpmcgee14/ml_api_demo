@@ -1,0 +1,20 @@
+stages:
+  clean_data:
+    cmd: python model/clean_data.py
+    deps:
+    - data/census.csv
+    - model/clean_data.py
+    outs:
+    - data/census_cleaned.csv
+  train_model:
+    cmd: python model/train_model.py
+    deps:
+    - data/census_cleaned.csv
+    - model/train_model.py
+    outs:
+    - artifacts/MinMaxScaler.joblib
+    - artifacts/LabelBinarizer.joblib
+    - artifacts/OneHotEncoder.joblib
+    - artifacts/model.joblib
+    - artifacts/test.joblib
+    - artifacts/train.joblib
