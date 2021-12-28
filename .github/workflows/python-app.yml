@@ -37,12 +37,9 @@ jobs:
         aws configure set region us-west-2 --profile udacity_mlops
         aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
         aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
-
     - name: Get artifacts for testing
       run: |
         dvc pull
         # dvc get https://github.com/kevinpmcgee14/ml_api_demo model/artifacts/
-    - name: start local api for testing
-      run: uvicorn src.main:app --reload
     - name: Test with pytest
       run: pytest
