@@ -40,7 +40,8 @@ jobs:
 
     - name: Get artifacts for testing
       run: |
-        dvc get https://github.com/kevinpmcgee14/ml_api_demo model/artifacts/
+        dvc pull
+        # dvc get https://github.com/kevinpmcgee14/ml_api_demo model/artifacts/
     - name: start local api for testing
       run: uvicorn src.main:app --reload
     - name: Test with pytest
