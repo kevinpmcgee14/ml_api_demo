@@ -44,7 +44,7 @@ jobs:
         echo region = us-east-2 >> .aws/config
     - name: Get artifacts for testing
       run: |
-        dvc get-url https://github.com/kevinpmcgee14/ml_api_demo/model/artifacts/ 
+        dvc get https://github.com/kevinpmcgee14/ml_api_demo model/artifacts/ -o ./model/artifacts/
     - name: start local api for testing
       run: uvicorn src.main:app --reload
     - name: Test with pytest
