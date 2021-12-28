@@ -41,5 +41,6 @@ jobs:
         dvc pull
     - name: Test with pytest
       run: |
+        ls
         pytest ./model/test_model.py
         pytest ./src/test_api.py
