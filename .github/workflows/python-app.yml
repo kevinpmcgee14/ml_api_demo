@@ -40,8 +40,4 @@ jobs:
       run: |
         dvc pull
     - name: Test with pytest
-      run: |
-        ls
-        ls ./model
-        pytest ./model/test_model.py
-        pytest ./src/test_api.py
+      run: pytest
