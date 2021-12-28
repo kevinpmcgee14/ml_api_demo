@@ -65,9 +65,9 @@ def return_metrics(model, X, y, testing=True):
     preds = inference(model, X)
     precision, recall, fbeta = compute_model_metrics(y, preds)
     if testing:
-        print('TRAINING RESULTS')
-    else:
         print('TESTING RESULTS')
+    else:
+        print('TRAINING RESULTS')
     print('='*20)
     print(f"""Precision: {precision}\nRecall: {recall}\nfbeta: {fbeta}\n""")
 
