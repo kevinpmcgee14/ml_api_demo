@@ -32,9 +32,19 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: create aws configuration
+        run: |
+        mkdir .aws
+        touch .aws/credentials
+        touch .aws/config
+        echo [udacity_mlops] >> .aws/credentials
+        echo aws_access_key_id = ${{secrets.AWS_ACCESS_KEY_ID}} >> .aws/credentials
+        echo aws_secret_access_key = ${{secrets.AWS_SECRET_KEY}} >> .aws/credentials
+        echo [profile udacity_mlops] >> .aws/config
+        echo region = us-east-2 >> .aws/config
     - name: Get artifacts for testing
       run: |
-        dvc get https://github.com/kevinpmcgee14/ml_api_demo model/artifacts/ -o ./model/artifacts/
+        dvc get-url https://github.com/kevinpmcgee14/ml_api_demo/model/artifacts/ 
     - name: start local api for testing
       run: uvicorn src.main:app --reload
     - name: Test with pytest
