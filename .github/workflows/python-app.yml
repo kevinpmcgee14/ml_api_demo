@@ -13,9 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+    - name: print working directory
+      run: pwd
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
