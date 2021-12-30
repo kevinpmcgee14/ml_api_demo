@@ -66,5 +66,5 @@ jobs:
     - name: make an unshallow fetch
       run: git fetch --all --unshallow
     - name: Release
-      run: git push heroku master:main -f
+      run: git push heroku HEAD:main -f
 
