@@ -41,11 +41,27 @@ jobs:
         dvc pull
     - name: Test with pytest
       run: pytest
-    - name: Build and Release
+
+  Build and Release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install 'dvc[s3]'
+    - name: Pull from DVC
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      run:
+        dvc pull
+    - name: Release
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP: ${{ secrets.HEROKU_APP }}
       run: |
         git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git
+        git fetch --all --unshallow
         git push heroku master:main -f
 
