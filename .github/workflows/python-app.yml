@@ -31,40 +31,14 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: create aws configuration
-      run: |       
-        aws configure set region us-west-2 --profile udacity_mlops
-        aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
-        aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
-    - name: Get artifacts for testing
-      run: |
-        dvc pull
+    # - name: create aws configuration
+    #   run: |       
+    #     aws configure set region us-west-2 --profile udacity_mlops
+    #     aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
+    #     aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
+    # - name: Get artifacts for testing
+    #   run: |
+    #     dvc pull
     - name: Test with pytest
       run: pytest
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install 'dvc[s3]'
-    - name: create aws configuration
-      run: |       
-        aws configure set region us-west-2 --profile udacity_mlops
-        aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
-        aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
-    - name: Get artifacts for testing
-      run: dvc pull
-    - name: add heroku remote
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP: ${{ secrets.HEROKU_APP }}
-      run:  git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git
-    - name: make an unshallow fetch
-      run: git fetch --all --unshallow
-    - name: Release
-      run: git push heroku -f
 

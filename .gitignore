@@ -143,6 +143,5 @@ Loading complete
 
 #DVC
 /data/
-/artifacts/
 .DS_store
 /data
