@@ -57,16 +57,14 @@ jobs:
         aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
         aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
     - name: Get artifacts for testing
-      run: |
-        dvc pull
+      run: dvc pull
     - name: add heroku remote
-      run: |
-        git fetch --all --unshallow
-        git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git
-    - name: Release
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP: ${{ secrets.HEROKU_APP }}
-      run: |
-        git push heroku -f
+      run:  git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git
+    - name: make an unshallow fetch
+      run: git fetch --all --unshallow
+    - name: Release
+      run: git push heroku master:main -f
 
