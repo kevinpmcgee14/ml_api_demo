@@ -1,8 +1,7 @@
 import pandas as pd 
 
-def main():
+def main(df):
 
-    df = pd.read_csv('data/census.csv')
     for col in df.columns:
         col1 = col.strip()
         df = df.rename({col: col1}, axis=1)
@@ -18,8 +17,11 @@ def main():
         (df['occupation'] != 'Armed-Forces') &
         (df['marital-status'] != 'Married-AF-spouse')
     ]
-
-    df.to_csv('data/census_cleaned.csv', index=None, header=df.columns)
+    
+    return df
+    
 
 if __name__ == '__main__':
-    main()
+    df = pd.read_csv('data/census.csv')
+    df = main(df)
+    df.to_csv('data/census_cleaned.csv', index=None, header=df.columns)

@@ -15,28 +15,56 @@ def test_root():
     r = client.get("/")
     assert_response(r, expected_output)
     
-def test_predictions():
+def test_lessthan_predictions():
     features = {
         "features": [
             {
-            "age": 36,
-            "workclass": " State-gov",
-            "fnlgt": 210830,
-            "education": " Masters",
-            "marital-status": " Never-married",
-            "occupation": " Prof-specialty",
-            "relationship": " Own-child",
-            "race": " White",
-            "sex": " Female",
-            "capital-gain": 0,
-            "capital-loss": 0,
-            "hours-per-week": 30
+                "age": 36,
+                "workclass": " State-gov",
+                "fnlgt": 210830,
+                "education": " Masters",
+                "marital-status": " Never-married",
+                "occupation": " Prof-specialty",
+                "relationship": " Own-child",
+                "race": " White",
+                "sex": " Female",
+                "capital-gain": 0,
+                "capital-loss": 0,
+                "hours-per-week": 30
             }
         ]
     }
     expected_output = {
         "predictions": [
             "<=50"
+        ]
+    }
+    r = client.post("/predict/", json=features)
+    assert_response(r, expected_output)
+    
+    
+def test_greaterthan_predictions():
+    features = {
+        "features": [
+            {
+                "age": 31,
+                "workclass": " Private",
+                "fnlgt": 45781,
+                "education": " Masters",
+                "marital-status": " Never-married",
+                "occupation": " Prof-specialty",
+                "relationship": " Not-in-family",
+                "race": " White",
+                "sex": " Female",
+                "capital-gain": 14084,
+                "capital-loss": 0,
+                "hours-per-week": 50
+            }
+        ]
+    }
+    expected_output = {
+        "predictions": [
+            ">50"
         ]
     }
     r = client.post("/predict/", json=features)

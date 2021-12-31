@@ -62,5 +62,5 @@ async def predict(features: Features):
     feature_df = feature_df[all_cols]
     X = preprocess(feature_df)
     preds = model.predict(X).tolist()
-    response_preds = ['<=50' if pred==0 else '>=50' for pred in preds]
+    response_preds = ['<=50' if pred==0 else '>50' for pred in preds]
     return {"predictions": response_preds}
