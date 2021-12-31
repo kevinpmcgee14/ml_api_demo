@@ -1,0 +1,18 @@
+{
+    "features": [
+        {
+            "age": 36,
+            "workclass": " State-gov",
+            "fnlgt": 210830,
+            "education": " Masters",
+            "marital-status": " Never-married",
+            "occupation": " Prof-specialty",
+            "relationship": " Own-child",
+            "race": " White",
+            "sex": " Female",
+            "capital-gain": 0,
+            "capital-loss": 0,
+            "hours-per-week": 30
+        }
+    ]
+}

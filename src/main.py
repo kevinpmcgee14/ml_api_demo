@@ -1,9 +1,16 @@
+import os
 import joblib
 import json
 from pandas import DataFrame
 from fastapi import FastAPI
 from src.helpers import *
 from src.models import Features, Predictions
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
 
 model = joblib.load("./model/artifacts/model.joblib")
 all_cols = [
