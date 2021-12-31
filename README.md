@@ -18,4 +18,4 @@ API can be accessed at https://km-salary-predictor.herokuapp.com/. API documenta
 
 ### Using the API
 
-API is public, and can be accessed by anyone. The script https://github.com/kevinpmcgee14/ml_api_demo/blob/master/test_post.py can be run from the command line to make a request. Another option would be to use a product such as [Postman](https://www.postman.com/)
+API is public, and can be accessed by anyone. The script [test_post.py](https://github.com/kevinpmcgee14/ml_api_demo/blob/master/test_post.py) can be run from the command line to make a request. Another option would be to use a product such as [Postman](https://www.postman.com/)
