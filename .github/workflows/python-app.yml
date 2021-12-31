@@ -31,13 +31,10 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: create aws configuration
-      run: |       
-        aws configure set region us-west-2 --profile udacity_mlops
-        aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}} --profile udacity_mlops
-        aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}} --profile udacity_mlops
     - name: Get artifacts for testing
       run: |
+        dvc remote modify s3remote access_key_id ${{secrets.AWS_ACCESS_KEY_ID}}
+        dvc remote modify s3remote secret_access_key ${{secrets.AWS_SECRET_KEY}}
         dvc pull
     - name: Test with pytest
       run: pytest
