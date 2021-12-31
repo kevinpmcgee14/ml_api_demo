@@ -3,5 +3,4 @@
     autostage = true
 ['remote "s3remote"']
     url = s3://kevin-mlops-demo-bucket
-    profile = udacity_mlops
     region = us-east-2
